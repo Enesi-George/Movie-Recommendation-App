@@ -1,4 +1,3 @@
-// src/store/reducers.js
 import { createSlice } from '@reduxjs/toolkit';
 
 
@@ -7,6 +6,7 @@ const initialState= {
   movies: [],
   genres: [],
   error: '',
+  selectedGenres: []
 }
 
 //implementing reducer and actions using createslice()
@@ -36,19 +36,24 @@ export const movieSlice = createSlice({
       state.genres = [];
       state.error = action.payload;
     },
-    toggleGenre: (state, action) =>{
-      const genreId = action.payload;
-      if (state.genres.includes(genreId)) {
-        state.genres = state.genres.filter((data) => data !== genreId);
-      } else {
-        state.genres.push(genreId);
+    toggleGenre: (state, action) => {
+        const genreId = action.payload;
+        if (state.selectedGenres.includes(genreId)) {
+          state.selectedGenres = state.selectedGenres.filter(id => id !== genreId);
+        } else {
+          state.selectedGenres.push(genreId);
+        }
+      },
+      clearSelectedGenres: (state) => {
+        state.selectedGenres = []; 
+        //this will be useful in case we decided to have button remove all cleared out all select at once.
       }
-    }
+      
   },
 });
 
 
 //distructuring movieSlice.action objects to extract the action creators 
-export const { fetchMovieRequest, fetchMovieSuccess, fetchMovieFailure, toggleGenre, fetchGenre } = movieSlice.actions;
+export const { fetchMovieRequest, fetchMovieSuccess, fetchMovieFailure, toggleGenre, fetchGenre, clearSelectedGenres } = movieSlice.actions;
 
 export default movieSlice.reducer;

@@ -1,22 +1,28 @@
 import { Provider } from 'react-redux'
 import './App.css';
-import MovieList from './components/MovieList/MovieList';
-import GenreSelection from './components/GenreSelection/genreselection';
+import HomePage from './components/HomePage/homepage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MovieDetail from './components/MovieDetail/moviedetail';
+import AppBar from './components/AppBar/appbar';
 import store from './redux-store';
 
 function App() {
 
   return (
-    <Provider store ={store}>
-      <div className=" min-h-screen">
-        <div className="max-w-4xl mx-auto p-6">
-          <h1 className="text-3xl font-semibold mb-6">Movie Recommendation App</h1>
-          <GenreSelection />
-          <MovieList />
-        </div>
+    <Provider store={store}>
+      <div className="content">
+        <Router>
+        <AppBar/>
+          <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
+          </Routes>
+        </Router>
       </div>
     </Provider>
   )
 }
 
 export default App
+
+

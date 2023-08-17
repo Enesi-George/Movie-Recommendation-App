@@ -34,12 +34,3 @@ export const fetchMovies = () => async (dispatch) => {
     }
   };
 
-
-  // const fetchGenres = createAsyncThunk('movies/fetchGenres', async () => {
-  //   const response = await axios.get(
-  //     'https://api.themoviedb.org/3/genre/movie/list',{headers});
-  //   return (response.data.genres);
-  // });
-
-  // export { fetchGenres, toggleGenre };
-
